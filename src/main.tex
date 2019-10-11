@@ -1,0 +1,71 @@
+%! Author = kevin
+% THIS IS THE HANDOUT
+%! Date = 2019-10-10
+
+% Preamble
+\documentclass[11pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+%\newthereom{theorem}{Theorem}[section]
+\newtheorem{problem}{Problem}
+
+\title{Stars and Bars}
+\author{Kevin Lu}
+\date{Oct 20th, 2019}
+
+% Document
+\begin{document}
+
+    \maketitle
+
+    \section{Introduction}
+    Stars and bars is a fundamental combinatorial tool used in numerous math olympiads to count the number of non-negative diophantine (integral) solutions to equations of the form $a_1+a_2\cdots a_k=n$.
+    \section{Warmup}
+    Before we jump into it, let's review some basic combinatorics. Reminder that
+    \begin{equation}
+        _nC_k = {n\choose k} =\frac{n!}{k!(n-k)!},
+    \end{equation}
+    which is precisely the number of ways to choose k items from n choices.
+    \begin{enumerate}
+        \item Find the number of ways to scramble a standard deck of 52 cards (as a factorial).
+        \item Find the number of ways to scramble the word "abba".
+        \item Suppose an ant is on (0,0) on a cartesian plane and can only move one spot to the right or one spot up. Find the number of ways the ant can move to
+        \begin{enumerate}
+            \item (2,2)?
+            \item (3,5)?
+            \item (n,k)?
+        \end{enumerate}
+        \item Slightly harder: How many circular necklaces can you make with 5 red beads and 3 blue beads?
+    \end{enumerate}
+    \section{The Idea}
+    Motivating question: \\
+    Find the number of non-negative integer solutions to the equation
+    \begin{equation}
+        x_1+x_2+x_3+x_4=10.
+    \end{equation}
+    Though it may be bashed using raw casework, try finding a simpler and more elegant solution using a bijection instead. A bijection is a relation between this problem and another problem that counts the same thing.  Give yourself a few minutes to try it out first. \par
+    Consider giving ten pieces of candy to four kids such that some of them can have no candy. You could simply split the four pieces of candy into four piles. One way you can do this is by placing the ten pieces of candy in a row and place dividers between them. We can split them in the following manner, where $X$'s represent the candy and $|$'s represents the dividers
+    \begin{equation}
+        XX|XXX||XXXXX
+    \end{equation} \par
+    This represents two to the first child, three to the second, none to the third, and five to the fourth. Notice that we \textbf{are allowed} to give them no candy, so we are allowed to put two dividers next to each other. \par
+    So now we have a bijection: every way we arrange the stars (the $X$'s) and the bars (the $|$'s) corresponds, or bijects, to a way we can distribute the candy, or simply a way to solve equation 2. Thus, \textbf{counting the number of ways to rearrange the stars and bars is equivalent to counting the number of ways to solve the equation}. Since we have to place 3 bars among 13 possible spaces, we have $\binom{13}{3}$ = 264 possible solutions.
+    As that sinks in, try to use this to find a general formula for the number of solutions to the equation
+    \begin{equation}
+        \sum_{i=1}^ka_i=a_1+a_2+a_3\cdots a_k=n
+    \end{equation}
+    This is equivalent to splitting n stars with k-1 bars, placing k-1 bars among n+k-1 spaces, yielding $\binom{n+k-1}{k-1}$ solutions. Lets look at equation 2 for only non-negative solutions. This is equivalent to splitting n pieces of candy such that each child gets \textbf{at least 1 piece of candy}, or they get a positive number of candy. One way to do this is to first give one piece of candy to every child, then split the remaining 10-4=6 pieces of candy among the four kids with the same formula. \par
+    But there is a simpler solution. Consider the same setup, 10 stars and 3 bars, except you can not place two bars next to each other. The _'s in the following represent the possible locations for the bars in the following diagram
+    \begin{equation}
+        X_X_X_X_X_X_X_X_X_X
+    \end{equation}
+    Note that there are nine locations for three bars, and two bars can not share the same slot. This yields a total of $\binom{9}{3}$ solutions. Similarly, this yields a total of $\binom{n-1}{k-1}$ solutions to equation 4.
+    \section{Problems}
+    \begin{enumerate}
+        \item How many was can you place 12 softballs into 5 bins?
+        \item
+    \end{enumerate}
+\end{document}
